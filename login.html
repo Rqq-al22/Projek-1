@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <img src="./assets/logo.png" alt="Labirin" />
+        <div class="name">Labirin Center</div>
+      </div>
+      <div class="nav-links">
+        <a href="./index.html">Beranda</a>
+        <a href="./faqs.html">FAQs</a>
+        <a href="./kontak.html">Kontak</a>
+        <a class="btn" href="./login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="max-width:520px">
+    <h1>Masuk Akun</h1>
+    <p>Masukkan ID/Nama/Email dan Kata Sandi Anda.</p>
+    <form class="form" onsubmit="onSubmit(event)">
+      <label>ID/Nama/Email
+        <input id="login" required placeholder="A1xxxx / L2xxxx / email" />
+      </label>
+      <label>Password
+        <input id="password" type="password" required placeholder="••••••" />
+      </label>
+      <button class="btn" type="submit">Masuk</button>
+      <div>
+        <a href="#" onclick="forgot()">Lupa password?</a>
+      </div>
+    </form>
+    <div id="msg" class="alert" style="display:none"></div>
+  </main>
+
+  <script src="./js/app.js"></script>
+  <script>
+    async function onSubmit(e){
+      e.preventDefault();
+      const login = document.getElementById('login').value.trim();
+      const password = document.getElementById('password').value;
+      const res = await api('auth_login.php', {method:'POST', body: JSON.stringify({login, password})});
+      if(res.ok){
+        location.href = './dashboard.html';
+      }else{
+        showMsg('Login gagal. Periksa data Anda.');
+      }
+    }
+    async function forgot(){
+      const email = prompt('Masukkan email terdaftar:');
+      if(!email) return;
+      const res = await api('password_reset.php', {method:'POST', body: JSON.stringify({email})});
+      if(res.ok){ showMsg('Instruksi reset terkirim (cek email).'); }
+    }
+    function showMsg(t){ const m=document.getElementById('msg'); m.textContent=t; m.style.display='block'; }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <img src="./assets/logo.png" alt="Labirin" />
+        <div class="name">Labirin Center</div>
+      </div>
+      <div class="nav-links">
+        <a href="./dashboard.html">Beranda</a>
+        <a href="./absensi.html">Absensi</a>
+        <a href="./jadwal.html">Jadwal</a>
+        <a href="./evaluasi.html">Evaluasi</a>
+        <span class="tag" data-user-name></span>
+        <a class="btn btn-accent" href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="grid">
+      <div class="card">
+        <h2>Profil Ringkas</h2>
+        <div id="profile"></div>
+      </div>
+      <div class="card">
+        <h2>Navigasi</h2>
+        <div class="flex">
+          <a class="btn" href="./absensi.html">Absensi</a>
+          <a class="btn" href="./jadwal.html">Jadwal</a>
+          <a class="btn" href="./evaluasi.html">Evaluasi</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./js/app.js"></script>
+  <script>
+    async function ensure(){
+      const r = await getSession();
+      if(!r.user){ location.href = './login.html'; return; }
+      setLoggedUI(r.user);
+      const el = document.getElementById('profile');
+      el.innerHTML = `<div>Nama: <b>${r.user.name}</b></div><div>ID: ${r.user.id_code}</div><div>Role: ${r.user.role}</div>`;
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>

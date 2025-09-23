@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluasi - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <img src="./assets/logo.png" alt="Labirin" />
+        <div class="name">Labirin Center</div>
+      </div>
+      <div class="nav-links">
+        <a href="./dashboard.html">Beranda</a>
+        <a href="./absensi.html">Absensi</a>
+        <a href="./jadwal.html">Jadwal</a>
+        <a href="./evaluasi.html">Evaluasi</a>
+        <span class="tag" data-user-name></span>
+        <a class="btn btn-accent" href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div id="form-staff" class="card" style="display:none">
+      <h2>Unggah Evaluasi (PDF)</h2>
+      <form class="form" onsubmit="submitUpload(event)">
+        <label>ID Anak <input id="child_id" required /></label>
+        <label>Tanggal Pertemuan <input id="meeting_date" type="date" required /></label>
+        <label>Caption <input id="caption" placeholder="Ringkasan/ catatan" /></label>
+        <label>File PDF <input id="file" type="file" accept="application/pdf" required /></label>
+        <button class="btn" type="submit">Unggah</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Daftar Evaluasi</h2>
+      <table class="table" id="tbl">
+        <thead><tr><th>Tanggal</th><th>Caption</th><th>File</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="./js/app.js"></script>
+  <script>
+    let gUser=null;
+    async function ensure(){
+      const r = await getSession();
+      if(!r.user){ location.href = './login.html'; return; }
+      gUser = r.user; setLoggedUI(r.user);
+      if(gUser.id_code.startsWith('L2')) document.getElementById('form-staff').style.display='block';
+      loadList();
+    }
+    async function loadList(){
+      const r = await api('evaluations_list.php');
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      (r.items||[]).forEach(it=>{
+        const tr=document.createElement('tr');
+        const url = `../backend/uploads/${it.file_path}`;
+        tr.innerHTML = `<td>${it.meeting_date||''}</td><td>${(it.caption||'')}</td><td><a class='btn' href='${url}' target='_blank'>Lihat PDF</a></td>`;
+        tb.appendChild(tr);
+      });
+    }
+    async function submitUpload(e){
+      e.preventDefault();
+      const fd = new FormData();
+      fd.append('child_id', document.getElementById('child_id').value);
+      fd.append('meeting_date', document.getElementById('meeting_date').value);
+      fd.append('caption', document.getElementById('caption').value);
+      fd.append('file', document.getElementById('file').files[0]);
+      const res = await fetch('../backend/evaluations_upload.php',{method:'POST', body:fd, credentials:'include'});
+      const r = await res.json();
+      if(r.ok){ loadList(); alert('Berhasil diunggah'); }
+      else alert('Gagal');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>

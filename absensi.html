@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Absensi - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <img src="./assets/logo.png" alt="Labirin" />
+        <div class="name">Labirin Center</div>
+      </div>
+      <div class="nav-links">
+        <a href="./dashboard.html">Beranda</a>
+        <a href="./absensi.html">Absensi</a>
+        <a href="./jadwal.html">Jadwal</a>
+        <a href="./evaluasi.html">Evaluasi</a>
+        <span class="tag" data-user-name></span>
+        <a class="btn btn-accent" href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div id="form-staff" class="card" style="display:none">
+      <h2>Input Absensi (Staff)</h2>
+      <form class="form" onsubmit="submitAbsensi(event)">
+        <label>ID Anak
+          <input id="child_id" required />
+        </label>
+        <label>Status
+          <select id="status">
+            <option value="present">Hadir</option>
+            <option value="izin">Izin</option>
+            <option value="alpha">Alpha</option>
+          </select>
+        </label>
+        <label>Catatan
+          <input id="note" placeholder="Opsional" />
+        </label>
+        <button class="btn" type="submit">Simpan</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Riwayat Absensi</h2>
+      <table class="table" id="tbl">
+        <thead><tr><th>Tanggal</th><th>Status</th><th>Catatan</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="./js/app.js"></script>
+  <script>
+    let gUser=null;
+    async function ensure(){
+      const r = await getSession();
+      if(!r.user){ location.href = './login.html'; return; }
+      gUser = r.user; setLoggedUI(r.user);
+      if(gUser.id_code.startsWith('L2')) document.getElementById('form-staff').style.display='block';
+      loadList();
+    }
+    async function loadList(){
+      const r = await api('attendance.php');
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      (r.items||[]).forEach(it=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML = `<td>${new Date(it.created_at).toLocaleString()}</td><td>${it.status}</td><td>${it.note||''}</td>`;
+        tb.appendChild(tr);
+      });
+    }
+    async function submitAbsensi(e){
+      e.preventDefault();
+      const child_id = parseInt(document.getElementById('child_id').value,10);
+      const status = document.getElementById('status').value;
+      const note = document.getElementById('note').value;
+      const r = await api('attendance.php',{method:'POST', body: JSON.stringify({child_id,status,note})});
+      if(r.ok){ loadList(); alert('Tersimpan'); }
+      else alert('Gagal');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>
