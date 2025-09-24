@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jadwal - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="topbar topbar-yellow">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="../src/logo.png" alt="Labirin" />
+        <span class="topbar-title">Labirin Children Center</span>
+        <button class="hamburger" id="btnToggle" aria-label="toggle menu">☰</button>
+        <div class="search-wrap">
+          <input class="search" id="search" placeholder="Type for search..." />
+          <div class="search-results" id="searchResults" style="display:none"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="btnBell" aria-label="notifications">🔔</button>
+        <button class="icon-btn" id="btnProfile" aria-label="profile">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="avatar" id="avatar"></div>
+        <div class="sidebar-name" data-user-name>—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="side-item" href="./dashboard.html">Dashboard</a>
+        <a class="side-item" data-role="terapis" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="terapis" href="./absensi.html">Absen</a>
+        <a class="side-item active" href="./jadwal.html" data-role="terapis">Daftar Anak / Jadwal</a>
+        <a class="side-item" href="#" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page-head">
+        <div class="page-title" id="pageTitle">Daftar Anak / Jadwal</div>
+        <div class="breadcrumbs"><span class="bc-home">🏠</span> <span class="bc-sep">›</span> <span class="bc-role">Terapis</span> <span class="bc-sep">›</span> <span class="bc-current" id="bcCurrent">Daftar Anak / Jadwal</span></div>
+      </div>
+    <div id="form-staff" class="card" style="display:none">
+      <h2>Tambah Jadwal (Staff)</h2>
+      <form class="form" onsubmit="submitJadwal(event)">
+        <label>ID Anak <input id="child_id" required /></label>
+        <label>Hari <input id="day_of_week" placeholder="Senin" /></label>
+        <label>Mulai <input id="time_start" type="time" value="09:00" /></label>
+        <label>Selesai <input id="time_end" type="time" value="10:00" /></label>
+        <label>Ruang <input id="room" /></label>
+        <label>Catatan <input id="notes" /></label>
+        <button class="btn" type="submit">Simpan</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Jadwal Saat Ini</h2>
+      <table class="table" id="tbl">
+        <thead><tr><th>Hari</th><th>Waktu</th><th>Ruang</th><th>Catatan</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    let gUser=null;
+    async function ensure(){
+      gUser = await requireLoginAndRole();
+      if(gUser.role === 'terapis') document.getElementById('form-staff').style.display='block';
+      const av = document.getElementById('avatar');
+      if (gUser.gender === 'female') av.style.backgroundImage = "url('../src/images-4-removebg-preview.png')"; else av.style.backgroundImage = "url('../src/images-3-removebg-preview.png')";
+      document.getElementById('btnToggle').addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('collapsed'));
+      loadList();
+    }
+    async function loadList(){
+      const r = await api('schedules.php');
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      (r.items||[]).forEach(it=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML = `<td>${it.day_of_week}</td><td>${it.time_start} - ${it.time_end}</td><td>${it.room||''}</td><td>${it.notes||''}</td>`;
+        tb.appendChild(tr);
+      });
+    }
+    async function submitJadwal(e){
+      e.preventDefault();
+      const payload = {
+        child_id: parseInt(document.getElementById('child_id').value,10),
+        day_of_week: document.getElementById('day_of_week').value || 'Senin',
+        time_start: document.getElementById('time_start').value,
+        time_end: document.getElementById('time_end').value,
+        room: document.getElementById('room').value,
+        notes: document.getElementById('notes').value,
+      };
+      const r = await api('schedules.php',{method:'POST', body: JSON.stringify(payload)});
+      if(r.ok){ loadList(); alert('Tersimpan'); }
+      else alert('Gagal');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>
