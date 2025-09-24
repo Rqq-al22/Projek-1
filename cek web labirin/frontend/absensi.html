@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Absensi - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="topbar topbar-yellow">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="../src/logo.png" alt="Labirin" />
+        <span class="topbar-title">Labirin Children Center</span>
+        <button class="hamburger" id="btnToggle" aria-label="toggle menu">☰</button>
+        <div class="search-wrap">
+          <input class="search" id="search" placeholder="Type for search..." />
+          <div class="search-results" id="searchResults" style="display:none"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="btnBell" aria-label="notifications">🔔</button>
+        <button class="icon-btn" id="btnProfile" aria-label="profile">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="avatar" id="avatar"></div>
+        <div class="sidebar-name" data-user-name>—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="side-item" href="./dashboard.html">Dashboard</a>
+        <a class="side-item" data-role="terapis" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item active" data-role="terapis" href="./absensi.html">Absen</a>
+        <a class="side-item" href="./jadwal.html" data-role="terapis">Daftar Anak / Jadwal</a>
+        <a class="side-item" href="#" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page-head">
+        <div class="page-title" id="pageTitle">Absen</div>
+        <div class="breadcrumbs"><span class="bc-home">🏠</span> <span class="bc-sep">›</span> <span class="bc-role">Terapis</span> <span class="bc-sep">›</span> <span class="bc-current" id="bcCurrent">Absen</span></div>
+      </div>
+    <div id="form-staff" class="card" style="display:none">
+      <h2>Input Absensi (Staff)</h2>
+      <form class="form" onsubmit="submitAbsensi(event)">
+        <label>ID Anak
+          <input id="child_id" required />
+        </label>
+        <label>Status
+          <select id="status">
+            <option value="present">Hadir</option>
+            <option value="izin">Izin</option>
+            <option value="alpha">Alpha</option>
+          </select>
+        </label>
+        <label>Catatan
+          <input id="note" placeholder="Opsional" />
+        </label>
+        <button class="btn" type="submit">Simpan</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Riwayat Absensi</h2>
+      <table class="table" id="tbl">
+        <thead><tr><th>Tanggal</th><th>Status</th><th>Catatan</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    let gUser=null;
+    async function ensure(){
+      gUser = await requireLoginAndRole();
+      if(gUser.role === 'terapis') document.getElementById('form-staff').style.display='block';
+      const av = document.getElementById('avatar');
+      if (gUser.gender === 'female') av.style.backgroundImage = "url('../src/images-4-removebg-preview.png')"; else av.style.backgroundImage = "url('../src/images-3-removebg-preview.png')";
+      const toggle = document.getElementById('btnToggle');
+      toggle.addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('collapsed'));
+      toggle.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); document.getElementById('sidebar').classList.toggle('collapsed'); } });
+      loadList();
+    }
+    async function loadList(){
+      const r = await api('attendance.php');
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      (r.items||[]).forEach(it=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML = `<td>${new Date(it.created_at).toLocaleString()}</td><td>${it.status}</td><td>${it.note||''}</td>`;
+        tb.appendChild(tr);
+      });
+    }
+    async function submitAbsensi(e){
+      e.preventDefault();
+      const child_id = parseInt(document.getElementById('child_id').value,10);
+      const status = document.getElementById('status').value;
+      const note = document.getElementById('note').value;
+      const r = await api('attendance.php',{method:'POST', body: JSON.stringify({child_id,status,note})});
+      if(r.ok){ loadList(); alert('Tersimpan'); }
+      else alert('Gagal');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>
