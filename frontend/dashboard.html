@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="topbar topbar-yellow">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="../src/logo.png" alt="Labirin" />
+        <span class="topbar-title">Labirin Children Center</span>
+        <button class="hamburger" id="btnToggle" aria-label="toggle menu">☰</button>
+        <div class="search-wrap">
+          <input class="search" id="search" placeholder="Type for search..." />
+          <div class="search-results" id="searchResults" style="display:none"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="btnBell" aria-label="notifications">🔔</button>
+        <a class="icon-btn" id="btnProfile" aria-label="profile" href="./profile.html">👤</a>
+        <div class="dropdown" id="notifPanel" style="display:none">
+          <div class="dropdown-title">Notifikasi</div>
+          <div class="dropdown-body" id="notifBody">
+            <div class="dropdown-item">Tidak ada notifikasi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="avatar" id="avatar"></div>
+        <div class="sidebar-name" data-user-name>—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="side-item active" href="./dashboard.html">Dashboard</a>
+        <a class="side-item" data-role="terapis" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="orangtua" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="terapis" href="./absensi.html">Absen</a>
+        <a class="side-item" data-role="orangtua" href="./absensi.html">Absen</a>
+        <a class="side-item" href="./children.html" data-role="terapis">Daftar Anak</a>
+        <a class="side-item" href="./jadwal.html" data-role="terapis">Jadwal</a>
+        <a class="side-item" href="./jadwal.html" data-role="orangtua">Kelas</a>
+        <a class="side-item" href="./paket.html" data-role="orangtua">Paket Belajar</a>
+        <a class="side-item" href="#" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page-head">
+        <div class="page-title" id="pageTitle">Dashboard</div>
+        <div class="breadcrumbs"><span class="bc-home">🏠</span> <span class="bc-sep">›</span> <span class="bc-role">—</span> <span class="bc-sep">›</span> <span class="bc-current" id="bcCurrent">Dashboard</span></div>
+      </div>
+      <div class="welcome card">
+        <h1>Selamat Datang</h1>
+        <p>Pantau perkembangan belajar dan kehadiran anak Anda secara real-time</p>
+    </div>
+  </main>
+  </div>
+
+  <!-- No extra tools block; tools now inside topbar -->
+
+  <script src="./js/app.js"></script>
+  <script>
+    async function ensure(){
+      const user = await requireLoginAndRole();
+      const el = document.getElementById('profile');
+      el.innerHTML = `<div>Nama: <b>${user.name||user.username}</b></div><div>Username: ${user.username||''}</div><div>Role: ${user.role}</div>`;
+      // Avatar based on role
+      const av = document.getElementById('avatar');
+      if (user.role === 'terapis') av.style.backgroundImage = "url('../src/images-3-removebg-preview.png')";
+      else av.style.backgroundImage = "url('../src/images-4-removebg-preview.png')";
+      const bc = document.querySelector('.bc-role');
+      if (bc) bc.textContent = (user.role === 'terapis') ? 'Terapis' : 'Orang Tua';
+
+      // Toggle sidebar (klik tombol & juga tahan Tab fokus)
+      const toggle = document.getElementById('btnToggle');
+      const sidebar = document.getElementById('sidebar');
+      
+      toggle.addEventListener('click', ()=> {
+        sidebar.classList.toggle('show');
+        // Close sidebar when clicking outside on mobile
+        if (window.innerWidth <= 768) {
+          document.addEventListener('click', function closeSidebar(e) {
+            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+              sidebar.classList.remove('show');
+              document.removeEventListener('click', closeSidebar);
+            }
+          });
+        }
+      });
+      
+      toggle.addEventListener('keydown', (e)=>{ 
+        if(e.key==='Enter' || e.key===' '){ 
+          e.preventDefault(); 
+          sidebar.classList.toggle('show'); 
+        } 
+      });
+
+      // Simple search UX: expand on focus
+      const s = document.getElementById('search');
+      s.addEventListener('focus', ()=> s.classList.add('expanded'));
+      s.addEventListener('blur', ()=> s.classList.remove('expanded'));
+
+      // Tampilkan terapis untuk orangtua
+      if (user.role === 'orangtua') {
+        try {
+          const r = await api('parent_therapist.php');
+          const list = (r.therapists||[]);
+          const box = document.createElement('div');
+          box.className = 'card';
+          box.innerHTML = `<h2>Terapis Anak Anda</h2>` + (list.length
+            ? `<ul>` + list.map(t=>`<li><b>${t.nama_lengkap||t.username}</b> <span style="color:#64748b">${t.email?`&lt;${t.email}&gt;`:''}</span></li>`).join('') + `</ul>`
+            : `<div>Belum ada terapis ditugaskan. Silakan hubungi admin.</div>`);
+          document.querySelector('.content').insertBefore(box, document.querySelector('.welcome'));
+        } catch(e) { /* ignore */ }
+      }
+
+      // Live search dengan efek loading singkat
+      const results = document.getElementById('searchResults');
+      let t=null;
+      function renderResults(items){
+        if(!items.length){ results.innerHTML = '<div class="result-empty">Tidak ada hasil</div>'; results.style.display='block'; return; }
+        results.innerHTML = items.map(it=>`<a href="${it.url}" class="result-item">${it.title}</a>`).join('');
+        results.style.display = 'block';
+      }
+      s.addEventListener('input', ()=>{
+        const q = s.value.trim();
+        clearTimeout(t);
+        if(q===''){ results.style.display='none'; return; }
+        results.style.display='block';
+        results.innerHTML = '<div class="loader"></div>';
+        t = setTimeout(async ()=>{
+          // Cari sederhana: gabungkan hasil dari endpoint yang ada
+          const outs = [];
+          try{
+            const ev = await api('evaluations_list.php');
+            (ev.items||[]).filter(x=> (x.caption||'').toLowerCase().includes(q.toLowerCase())).slice(0,5)
+              .forEach(x=> outs.push({title:`Evaluasi: ${x.caption}`, url:'./evaluasi.html'}));
+          }catch(e){}
+          try{
+            const sc = await api('schedules.php');
+            (sc.items||[]).filter(x=> (x.child_name||'').toLowerCase().includes(q.toLowerCase())).slice(0,5)
+              .forEach(x=> outs.push({title:`Jadwal: ${x.child_name}`, url:'./jadwal.html'}));
+          }catch(e){}
+          renderResults(outs.slice(0,8));
+        }, 250);
+      });
+
+      // Notifikasi
+      const bell = document.getElementById('btnBell');
+      const panel = document.getElementById('notifPanel');
+      bell.addEventListener('click', ()=>{
+        panel.style.display = panel.style.display==='none' ? 'block' : 'none';
+      });
+      document.addEventListener('click', (e)=>{
+        if(!panel.contains(e.target) && e.target!==bell){ panel.style.display='none'; }
+      });
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>

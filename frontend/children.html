@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Anak - Terapis</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="topbar topbar-yellow">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="../src/logo.png" alt="Labirin" />
+        <span class="topbar-title">Labirin Children Center</span>
+        <button class="hamburger" id="btnToggle" aria-label="toggle menu">☰</button>
+      </div>
+      <div class="topbar-right">
+        <a class="icon-btn" href="./profile.html" aria-label="profile">👤</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="avatar" id="avatar"></div>
+        <div class="sidebar-name" data-user-name>—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="side-item" href="./dashboard.html">Dashboard</a>
+        <a class="side-item" data-role="terapis" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="terapis" href="./absensi.html">Absen</a>
+        <a class="side-item active" href="./children.html" data-role="terapis">Daftar Anak / Jadwal</a>
+        <a class="side-item" href="#" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page-head">
+        <div class="page-title">Daftar Anak yang Ditangani</div>
+        <div class="breadcrumbs"><span class="bc-home">🏠</span> <span class="bc-sep">›</span> <span class="bc-role">Terapis</span> <span class="bc-sep">›</span> <span class="bc-current">Daftar Anak</span></div>
+      </div>
+
+      <div id="list" class="grid"></div>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    function card(child){
+      return `
+      <div class="card">
+        <div class="flex">
+          <div class="avatar" style="width:96px;height:96px;background:#e5e7eb"></div>
+          <div>
+            <div><b>${child.name}</b></div>
+            <div class="tag">Orangtua: ${child.parent_name || child.parent_username}</div>
+          </div>
+        </div>
+        <div class="flex mt-16">
+          <a class="btn" href="./evaluasi.html?child_id=${child.id}">Buat Laporan</a>
+          <a class="btn" href="./absensi.html?child_id=${child.id}">Input Absensi</a>
+          <a class="btn" href="./jadwal.html?child_id=${child.id}">Atur Jadwal</a>
+        </div>
+      </div>`;
+    }
+    async function ensure(){
+      const user = await requireLoginAndRole('terapis');
+      const av = document.getElementById('avatar');
+      av.style.backgroundImage = "url('../src/images-3-removebg-preview.png')";
+      document.getElementById('btnToggle').addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('collapsed'));
+      const r = await api('therapist_children.php');
+      const list = document.getElementById('list');
+      list.innerHTML = (r.items||[]).map(card).join('');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>
+
+

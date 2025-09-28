@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jadwal - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="topbar topbar-yellow">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="../src/logo.png" alt="Labirin" />
+        <span class="topbar-title">Labirin Children Center</span>
+        <button class="hamburger" id="btnToggle" aria-label="toggle menu">☰</button>
+        <div class="search-wrap">
+          <input class="search" id="search" placeholder="Type for search..." />
+          <div class="search-results" id="searchResults" style="display:none"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="btnBell" aria-label="notifications">🔔</button>
+        <a class="icon-btn" id="btnProfile" aria-label="profile" href="./profile.html">👤</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="avatar" id="avatar"></div>
+        <div class="sidebar-name" data-user-name>—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="side-item" href="./dashboard.html">Dashboard</a>
+        <a class="side-item" data-role="terapis" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="orangtua" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="terapis" href="./absensi.html">Absen</a>
+        <a class="side-item" data-role="orangtua" href="./absensi.html">Absen</a>
+        <a class="side-item" href="./children.html" data-role="terapis">Daftar Anak</a>
+        <a class="side-item active" href="./jadwal.html" data-role="terapis">Jadwal</a>
+        <a class="side-item active" href="./jadwal.html" data-role="orangtua">Kelas</a>
+        <a class="side-item" href="./paket.html" data-role="orangtua">Paket Belajar</a>
+        <a class="side-item" href="#" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page-head">
+        <div class="page-title" id="pageTitle">Daftar Anak / Jadwal</div>
+        <div class="breadcrumbs"><span class="bc-home">🏠</span> <span class="bc-sep">›</span> <span class="bc-role">—</span> <span class="bc-sep">›</span> <span class="bc-current" id="bcCurrent">Daftar Anak / Jadwal</span></div>
+      </div>
+    <div id="form-staff" class="card" style="display:none">
+      <h2>Tambah Jadwal (Staff)</h2>
+      <form class="form" onsubmit="submitJadwal(event)">
+        <label id="childIdWrap">ID Anak <input id="child_id" required /></label>
+        <label>Hari <input id="day_of_week" placeholder="Senin" /></label>
+        <label>Mulai <input id="time_start" type="time" value="09:00" /></label>
+        <label>Selesai <input id="time_end" type="time" value="10:00" /></label>
+        <label>Ruang <input id="room" /></label>
+        <label>Catatan <input id="notes" /></label>
+        <button class="btn" type="submit">Simpan</button>
+      </form>
+    </div>
+
+    <div class="card" id="kelas-info" style="display:none"></div>
+
+    <div class="card">
+      <h2 id="tblTitle">Jadwal Saat Ini</h2>
+      <table class="table" id="tbl">
+        <thead id="tblHead"><tr><th>Hari</th><th>Waktu</th><th>Ruang</th><th>Catatan</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    let gUser=null;
+    function getQuery(name){ return new URLSearchParams(location.search).get(name); }
+    async function ensure(){
+      gUser = await requireLoginAndRole();
+      if(gUser.role === 'terapis') {
+        document.getElementById('form-staff').style.display='block';
+        const qChild = getQuery('child_id');
+        if(qChild){
+          document.getElementById('child_id').value = qChild;
+          document.getElementById('childIdWrap').style.display='none';
+        }
+      }
+      const av = document.getElementById('avatar');
+      // Default avatar based on role
+      if (gUser.role === 'terapis') av.style.backgroundImage = "url('../src/images-3-removebg-preview.png')"; 
+      else av.style.backgroundImage = "url('../src/images-4-removebg-preview.png')";
+      const bc = document.querySelector('.bc-role');
+      if (bc) bc.textContent = (gUser.role === 'terapis') ? 'Terapis' : 'Orang Tua';
+      document.getElementById('btnToggle').addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('collapsed'));
+
+      // Sesuaikan tampilan untuk orang tua: judul, kolom tabel, dan info terapis
+      if (gUser.role === 'orangtua') {
+        document.getElementById('pageTitle').textContent = 'Kelas';
+        document.getElementById('bcCurrent').textContent = 'Kelas';
+        document.getElementById('tblTitle').textContent = 'Jadwal Kelas Anak';
+        document.getElementById('tblHead').innerHTML = '<tr><th>Tanggal</th><th>Jam</th><th>Sesi</th><th>Pertemuan</th></tr>';
+        // Tampilkan boks info terapis yang ditugaskan
+        try{
+          const r = await api('parent_therapist.php');
+          const list = (r.therapists||[]);
+          const info = document.getElementById('kelas-info');
+          info.style.display = 'block';
+          info.innerHTML = '<h2>Data Terapis</h2>' + (list.length
+            ? '<ul>' + list.map(t=>`<li><b>${t.nama_lengkap||t.username}</b> <span style="color:#64748b">${t.email?`&lt;${t.email}&gt;`:''}</span></li>`).join('') + '</ul>'
+            : '<div>Belum ada terapis ditugaskan.</div>');
+        }catch(e){ /* ignore */ }
+      }
+      loadList();
+    }
+    async function loadList(){
+      const r = await api('schedules.php');
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      const items = (r.items||[]);
+      items.forEach((it, idx)=>{
+        const tr=document.createElement('tr');
+        if (gUser?.role === 'orangtua') {
+          tr.innerHTML = `<td>${it.day_of_week||''}</td><td>${(it.time_start||'').toString().slice(0,5)}</td><td>${it.room||''}</td><td>${idx+1}</td>`;
+        } else {
+          tr.innerHTML = `<td>${it.day_of_week}</td><td>${it.time_start} - ${it.time_end}</td><td>${it.room||''}</td><td>${it.notes||''}</td>`;
+        }
+        tb.appendChild(tr);
+      });
+    }
+    async function submitJadwal(e){
+      e.preventDefault();
+      const payload = {
+        child_id: parseInt(document.getElementById('child_id').value,10),
+        day_of_week: document.getElementById('day_of_week').value || 'Senin',
+        time_start: document.getElementById('time_start').value,
+        time_end: document.getElementById('time_end').value,
+        room: document.getElementById('room').value,
+        notes: document.getElementById('notes').value,
+      };
+      const r = await api('schedules.php',{method:'POST', body: JSON.stringify(payload)});
+      if(r.ok){ loadList(); alert('Tersimpan'); }
+      else alert('Gagal');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>

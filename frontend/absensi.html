@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Absensi - Labirin Children</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="topbar topbar-yellow">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <img class="topbar-logo" src="../src/logo.png" alt="Labirin" />
+        <span class="topbar-title">Labirin Children Center</span>
+        <button class="hamburger" id="btnToggle" aria-label="toggle menu">☰</button>
+        <div class="search-wrap">
+          <input class="search" id="search" placeholder="Type for search..." />
+          <div class="search-results" id="searchResults" style="display:none"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="btnBell" aria-label="notifications">🔔</button>
+        <a class="icon-btn" id="btnProfile" aria-label="profile" href="./profile.html">👤</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="avatar" id="avatar"></div>
+        <div class="sidebar-name" data-user-name>—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="side-item" href="./dashboard.html">Dashboard</a>
+        <a class="side-item" data-role="terapis" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item" data-role="orangtua" href="./evaluasi.html">Laporan Terapi</a>
+        <a class="side-item active" data-role="terapis" href="./absensi.html">Absen</a>
+        <a class="side-item active" data-role="orangtua" href="./absensi.html">Absen</a>
+        <a class="side-item" href="./children.html" data-role="terapis">Daftar Anak</a>
+        <a class="side-item" href="./jadwal.html" data-role="terapis">Jadwal</a>
+        <a class="side-item" href="./jadwal.html" data-role="orangtua">Kelas</a>
+        <a class="side-item" href="./paket.html" data-role="orangtua">Paket Belajar</a>
+        <a class="side-item" href="#" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page-head">
+        <div class="page-title" id="pageTitle">Absen</div>
+        <div class="breadcrumbs"><span class="bc-home">🏠</span> <span class="bc-sep">›</span> <span class="bc-role">—</span> <span class="bc-sep">›</span> <span class="bc-current" id="bcCurrent">Absen</span></div>
+      </div>
+    <div id="form-staff" class="card" style="display:none">
+      <h2>Input Absensi (Staff)</h2>
+      <form class="form" onsubmit="submitAbsensi(event)">
+        <label id="childIdWrap">ID Anak
+          <input id="child_id" required />
+        </label>
+        <label>Status
+          <select id="status">
+            <option value="hadir">Hadir</option>
+            <option value="izin">Izin</option>
+            <option value="sakit">Sakit</option>
+            <option value="alpa">Alpa</option>
+          </select>
+        </label>
+        <label>Catatan
+          <input id="note" placeholder="Opsional" />
+        </label>
+        <button class="btn" type="submit">Simpan</button>
+      </form>
+    </div>
+
+    <!-- Summary Box -->
+    <div class="card attendance-summary" id="attendanceSummary" style="display: none;">
+      <div class="summary-header">
+        <h2>Daftar Kehadiran Anak</h2>
+      </div>
+      <div class="summary-content">
+        <div class="summary-left">
+          <div class="summary-total">
+            <span class="summary-label">Kehadiran</span>
+            <span class="summary-count" id="summaryCount">0/0</span>
+          </div>
+        </div>
+        <div class="summary-right">
+          <div class="summary-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="statHadir">0</span>
+              <span class="stat-label">Hadir</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="statIzin">0</span>
+              <span class="stat-label">Izin</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="statTidakHadir">0</span>
+              <span class="stat-label">Tidak Hadir</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Riwayat Kehadiran Anak</h2>
+      <table class="table" id="tbl">
+        <thead><tr><th>Tanggal</th><th>Status</th><th>Catatan</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    </main>
+  </div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    let gUser=null;
+    function getQuery(name){ return new URLSearchParams(location.search).get(name); }
+    async function ensure(){
+      gUser = await requireLoginAndRole();
+      if(gUser.role === 'terapis'){
+        document.getElementById('form-staff').style.display='block';
+        const qChild = getQuery('child_id');
+        if(qChild){
+          document.getElementById('child_id').value = qChild;
+          document.getElementById('childIdWrap').style.display='none';
+        }
+      }
+      const av = document.getElementById('avatar');
+      // Default avatar based on role
+      if (gUser.role === 'terapis') av.style.backgroundImage = "url('../src/images-3-removebg-preview.png')"; 
+      else av.style.backgroundImage = "url('../src/images-4-removebg-preview.png')";
+      const toggle = document.getElementById('btnToggle');
+      const sidebar = document.getElementById('sidebar');
+      
+      toggle.addEventListener('click', ()=> {
+        sidebar.classList.toggle('show');
+        // Close sidebar when clicking outside on mobile
+        if (window.innerWidth <= 768) {
+          document.addEventListener('click', function closeSidebar(e) {
+            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+              sidebar.classList.remove('show');
+              document.removeEventListener('click', closeSidebar);
+            }
+          });
+        }
+      });
+      
+      const bc = document.querySelector('.bc-role');
+      if (bc) bc.textContent = (gUser.role === 'terapis') ? 'Terapis' : 'Orang Tua';
+      
+      toggle.addEventListener('keydown', (e)=>{ 
+        if(e.key==='Enter' || e.key===' '){ 
+          e.preventDefault(); 
+          sidebar.classList.toggle('show'); 
+        } 
+      });
+      loadList();
+    }
+    async function loadList(){
+      const r = await api('attendance.php');
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      (r.items||[]).forEach(it=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML = `<td>${new Date(it.created_at).toLocaleString()}</td><td>${it.status}</td><td>${it.note||''}</td>`;
+        tb.appendChild(tr);
+      });
+      
+      // Update summary if available
+      if (r.summary) {
+        updateSummary(r.summary);
+      }
+    }
+    
+    function updateSummary(summary) {
+      const summaryCard = document.getElementById('attendanceSummary');
+      if (summaryCard) {
+        summaryCard.style.display = 'block';
+        
+        // Update total count
+        const total = parseInt(summary.total) || 0;
+        const hadir = parseInt(summary.hadir) || 0;
+        document.getElementById('summaryCount').textContent = `${hadir}/${total}`;
+        
+        // Update individual stats
+        document.getElementById('statHadir').textContent = hadir;
+        document.getElementById('statIzin').textContent = parseInt(summary.izin) || 0;
+        document.getElementById('statTidakHadir').textContent = parseInt(summary.tidak_hadir) || 0;
+      }
+    }
+    async function submitAbsensi(e){
+      e.preventDefault();
+      const child_id = parseInt(document.getElementById('child_id').value,10);
+      const status = document.getElementById('status').value;
+      const note = document.getElementById('note').value;
+      const r = await api('attendance.php',{method:'POST', body: JSON.stringify({child_id,status,note})});
+      if(r.ok){ loadList(); alert('Tersimpan'); }
+      else alert('Gagal');
+    }
+    function logout(){ fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.href='./index.html'); }
+    ensure();
+  </script>
+</body>
+</html>

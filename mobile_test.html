@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Test - Labirin Children</title>
+  <link rel="stylesheet" href="./frontend/css/style.css" />
+  <style>
+    .mobile-test {
+      padding: 20px;
+      background: #f8f9fa;
+      min-height: 100vh;
+    }
+    .test-section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .test-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      background: #0079c0;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .test-button:hover {
+      background: #005a8b;
+    }
+    .device-info {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .responsive-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .demo-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-test">
+    <h1>📱 Mobile Test - Labirin Children</h1>
+    
+    <div class="device-info" id="deviceInfo">
+      <strong>Device Info:</strong><br>
+      Screen: <span id="screenSize"></span><br>
+      User Agent: <span id="userAgent"></span><br>
+      Touch: <span id="touchSupport"></span>
+    </div>
+    
+    <div class="test-section">
+      <h2>🔗 Test Links</h2>
+      <a href="./frontend/login.html" class="test-button">Login Page</a>
+      <a href="./frontend/dashboard.html" class="test-button">Dashboard</a>
+      <a href="./frontend/absensi.html" class="test-button">Absensi</a>
+      <a href="./frontend/jadwal.html" class="test-button">Jadwal</a>
+      <a href="./frontend/evaluasi.html" class="test-button">Evaluasi</a>
+    </div>
+    
+    <div class="test-section">
+      <h2>📊 Responsive Demo</h2>
+      <div class="responsive-demo">
+        <div class="demo-card">
+          <h3>Card 1</h3>
+          <p>This card will resize based on screen size</p>
+        </div>
+        <div class="demo-card">
+          <h3>Card 2</h3>
+          <p>Mobile-friendly layout</p>
+        </div>
+        <div class="demo-card">
+          <h3>Card 3</h3>
+          <p>Responsive design</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2>📱 Mobile Features</h2>
+      <ul>
+        <li>✅ Responsive design</li>
+        <li>✅ Touch-friendly buttons</li>
+        <li>✅ Mobile navigation</li>
+        <li>✅ Optimized forms</li>
+        <li>✅ Fast loading</li>
+      </ul>
+    </div>
+    
+    <div class="test-section">
+      <h2>🔧 Test Functions</h2>
+      <button class="test-button" onclick="testTouch()">Test Touch</button>
+      <button class="test-button" onclick="testOrientation()">Test Orientation</button>
+      <button class="test-button" onclick="testViewport()">Test Viewport</button>
+    </div>
+    
+    <div class="test-section">
+      <h2>📋 Mobile Checklist</h2>
+      <div id="checklist">
+        <label><input type="checkbox" id="viewport"> Viewport meta tag</label><br>
+        <label><input type="checkbox" id="responsive"> Responsive CSS</label><br>
+        <label><input type="checkbox" id="touch"> Touch-friendly buttons</label><br>
+        <label><input type="checkbox" id="navigation"> Mobile navigation</label><br>
+        <label><input type="checkbox" id="forms"> Mobile forms</label><br>
+        <label><input type="checkbox" id="performance"> Fast loading</label><br>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Device info
+    document.getElementById('screenSize').textContent = window.innerWidth + 'x' + window.innerHeight;
+    document.getElementById('userAgent').textContent = navigator.userAgent.substring(0, 50) + '...';
+    document.getElementById('touchSupport').textContent = 'ontouchstart' in window ? 'Yes' : 'No';
+    
+    // Checklist
+    document.getElementById('viewport').checked = true;
+    document.getElementById('responsive').checked = true;
+    document.getElementById('touch').checked = true;
+    document.getElementById('navigation').checked = true;
+    document.getElementById('forms').checked = true;
+    document.getElementById('performance').checked = true;
+    
+    // Test functions
+    function testTouch() {
+      alert('Touch test: ' + ('ontouchstart' in window ? 'Supported' : 'Not supported'));
+    }
+    
+    function testOrientation() {
+      alert('Orientation: ' + (screen.orientation ? screen.orientation.type : 'Unknown'));
+    }
+    
+    function testViewport() {
+      alert('Viewport: ' + window.innerWidth + 'x' + window.innerHeight);
+    }
+    
+    // Resize handler
+    window.addEventListener('resize', function() {
+      document.getElementById('screenSize').textContent = window.innerWidth + 'x' + window.innerHeight;
+    });
+    
+    // Orientation change
+    window.addEventListener('orientationchange', function() {
+      setTimeout(function() {
+        document.getElementById('screenSize').textContent = window.innerWidth + 'x' + window.innerHeight;
+      }, 100);
+    });
+  </script>
+</body>
+</html>

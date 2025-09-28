@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labirin Children Kendari - Homepage</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <img src="../src/logo.png" alt="Labirin" />
+        <span class="name">Labirin Children Center</span>
+      </div>
+      <div class="nav-links">
+        <a href="./index.html">Homepage</a>
+        <a href="#paket-labirin">Paket Belajar</a>
+        <span data-user-name class="tag"></span>
+        <a class="btn btn-login" data-btn-login href="./login.html">Login</a>
+        <a class="btn btn-accent hidden" data-btn-logout href="#" onclick="fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.reload())">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-image">
+          <img src="../src/foto.png" alt="Klinik Tumbuh Kembang" />
+        </div>
+        <div class="hero-text">
+          <h1>Klinik Tumbuh Kembang & Center Terapi Anak</h1>
+          <p>Selamat datang di Labirin Children Center Kendari. Kami hadir untuk mendampingi tumbuh kembang anak Anda dengan layanan terapi yang profesional dan penuh kasih sayang.</p>
+          <div class="flex mt-16">
+            <a class="btn btn-accent" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20terapi%20anak">Hubungi CS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section container" id="paket-belajar">
+    <h2>Kenapa kami adalah pilihan yang tepat?</h2>
+    <p>Labirin Children Center Kendari adalah klinik tumbuh kembang dan center terapi anak yang telah berdedikasi dalam mendukung perkembangan optimal anak-anak sejak tahun 2020. Kami dengan penuh semangat menjalankan misi kami untuk memberikan layanan terapi yang berkualitas tinggi kepada anak-anak dengan kebutuhan khusus, siap membantu mewujudkan potensi terbaik anak Anda.</p>
+    
+    <div class="grid-2">
+      <div class="card card-feature">
+        <img class="card-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Metode" />
+        <div class="card-body">
+          <h3>Metode Belajar Terbaik</h3>
+          <p>Kami menyusun metode pembelajaran yang menyenangkan dan efektif, disesuaikan dengan kebutuhan individual setiap anak. Pendekatan terapi yang kami gunakan telah terbukti membantu anak mencapai milestone perkembangan yang optimal.</p>
+        </div>
+      </div>
+      <div class="card card-feature">
+        <img class="card-icon-img" src="../src/016-doctor.png" alt="Ikon Mentor/Terapis" />
+        <div class="card-body">
+          <h3>Mentor/Terapis Terbaik</h3>
+          <p>Tim terapis kami terdiri dari profesional berpengalaman yang telah menangani ribuan anak dengan berbagai kebutuhan khusus. Mereka berdedikasi penuh untuk memberikan pendampingan terbaik bagi tumbuh kembang anak Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="paket-labirin">
+    <h2>Paket Pembelajaran Labirin Children Center</h2>
+    <p>Berikut paket pembelajaran yang ada di labirin children center :</nbs p></p>
+    <div class="course-grid">
+      <article class="course-card card-3d">
+        <div class="course-header">
+          <img class="badge-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Paket" />
+          <h3>PAKET WICARA</h3>
+        </div>
+        <p>k</p>
+        <div class="course-note"></div>
+        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20PKN%20STAN" class="btn btn-primary course-btn" target="_blank" rel="noopener">JOIN</a>
+      </article>
+
+      <article class="course-card card-3d">
+        <div class="course-header">
+          <img class="badge-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Paket" />
+          <h3>PAKET OKUPASI</h3>
+        </div>
+        <p></p>
+        <div class="course-note"></div>
+        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20IPDN" class="btn btn-primary course-btn" target="_blank" rel="noopener">JOIN</a>
+      </article>
+
+      <article class="course-card card-3d">
+        <div class="course-header">
+          <img class="badge-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Paket" />
+          <h3>PAKET </h3>
+        </div>
+        <p>salam dari binjai</p>
+        <div class="course-note">alamak oyyy</div>
+        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20POLSTAT%20STIS" class="btn btn-primary course-btn" target="_blank" rel="noopener">JOIN</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section container" id="terapis">
+    <h2>Daftar Terapis</h2>
+    <p>Berikut adalah daftar terapis terpercaya kami untuk buah hati anda :</p>
+    <div class="therapist-grid">
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/dr.andi.png" alt="Terapis" />
+        <h3 class="therapist-name">Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 2</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 3</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 4</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 5</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 6</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 7</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 8</h3>
+      </article>
+      <article class="course-card therapist-card">
+        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
+        <h3 class="therapist-name">Terapis 9</h3>
+      </article>
+    </div>
+    <div class="therapist-cta">
+      <a href="#" class="btn btn-accent">Lihat Semua Terapis</a>
+    </div>
+  </section>
+
+  <section class="section container" id="tentang-kami">
+    <h2>Tentang Kami</h2>
+    <div class="about">
+      <div class="about-text">
+        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
+        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
+        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
+        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
+        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
+        <p>Hingga pada saat ini, Klinik Pela 9 telah melayani lebih dari 10.000 pasien dari dalam dan luar kota dengan jumlah sesi terapi mencapai 5.000/bulannya. Klinik Pela 9 telah hadir di bilangan Kebayoran, Tomang, dan Bintaro, serta dalam bentuk Pela 9 Education Center di Kemang.</p>
+      </div>
+      <div class="about-images">
+        <img src="../src/foto.png" alt="Terapi Anak" class="about-img" />
+        <img src="../src/foto.png" alt="Terapis" class="about-img small" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="testimoni">
+    <h2>Testimoni</h2>
+    <p>Lihat ungkapan pasien kami setelah mendapatkan layanan terbaik</p>
+    <div class="testimonial-wrap">
+      <button class="nav-btn prev" aria-label="Sebelumnya">‹</button>
+      <div class="testimonial-track" data-testimonial-track>
+        <article class="testimonial-card">
+          <div class="head">
+            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
+            <div>
+              <div class="name">Have Tomven</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p>“Sangat membantu perkembangan motorik anak saya…”</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="head">
+            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
+            <div>
+              <div class="name">Arna Wati</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p>“Terapisnya handal dan komunikatif, kebersihan terjaga, adminnya ramah.”</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="head">
+            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
+            <div>
+              <div class="name">Wahyu Titis Kholifah</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p>“Pelayanannya memuaskan, terapis profesional. Recommended!”</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="head">
+            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
+            <div>
+              <div class="name">Bunda Mega</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p>“Anak jadi lebih percaya diri, terima kasih tim Labirin.”</p>
+        </article>
+      </div>
+      <button class="nav-btn next" aria-label="Berikutnya">›</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">© 2025 Labirin Children Kendari</div>
+  </footer>
+  <script src="./js/app.js"></script>
+  <script>
+    getSession().then(r=>setLoggedUI(r.user))
+  </script>
+</body>
+</html>

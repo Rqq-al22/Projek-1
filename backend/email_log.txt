@@ -1,0 +1,49 @@
+2025-09-25 01:38:55 - TO: rezkialya0909@gmail.com - SUBJECT: Reset Password - Labirin Children Center
+FROM: no-reply@localhost
+MESSAGE PREVIEW: Reset Password - Labirin Children CenterHalo Budi Terapis,Kami menerima permintaan untuk mereset pas...
+---
+2025-09-25 01:38:55 - SUCCESS: Email sent successfully
+2025-09-25 01:39:51 - TO: test@example.com - SUBJECT: Test Email
+FROM: no-reply@localhost
+MESSAGE PREVIEW: Test Email dari Labirin...
+---
+2025-09-25 01:39:51 - SUCCESS: Email sent successfully
+2025-09-25 01:44:37 - SMTP ATTEMPT
+TO: rezkialya0909@gmail.com
+SUBJECT: Reset Password - Labirin Children Center
+SMTP: smtp.gmail.com:587
+---
+2025-09-25 01:44:38 - SUCCESS: Email sent via mail() function
+2025-09-25 01:47:41 - GMAIL SMTP ATTEMPT
+TO: rezkialya0909@gmail.com
+FROM: your-email@gmail.com
+SUBJECT: Reset Password - Labirin Children Center
+---
+2025-09-25 01:47:42 - SUCCESS: Email sent via Gmail SMTP
+2025-09-25 01:53:30 - SMTP ATTEMPT
+TO: rezkialya0909@gmail.com
+SUBJECT: Reset Password - Labirin Children Center
+SMTP: smtp.gmail.com:587
+---
+2025-09-25 01:53:31 - SUCCESS: Email sent via mail() function
+2025-09-25 04:01:29 - SIMPLE SMTP ATTEMPT
+TO: rezkialya0909@gmail.com
+SUBJECT: Reset Password - Labirin Children Center
+SMTP: smtp.gmail.com:587
+USER: your-email@gmail.com
+---
+2025-09-25 04:01:29 - SUCCESS: Email sent via configured mail()
+2025-09-25 04:23:56 - SIMPLE SMTP ATTEMPT
+TO: rezkialya0909@gmail.com
+SUBJECT: Reset Password - Labirin Children Center
+SMTP: smtp.gmail.com:587
+USER: your-email@gmail.com
+---
+2025-09-25 04:23:57 - SUCCESS: Email sent via configured mail()
+2025-09-25 04:25:02 - SIMPLE SMTP ATTEMPT
+TO: rezkialya0909@gmail.com
+SUBJECT: Reset Password - Labirin Children Center
+SMTP: smtp.gmail.com:587
+USER: your-email@gmail.com
+---
+2025-09-25 04:25:02 - SUCCESS: Email sent via configured mail()
