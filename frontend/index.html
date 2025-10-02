@@ -5,6 +5,1105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Labirin Children Kendari - Homepage</title>
   <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fdfdfd;
+      color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: url("../src/background.jpg") no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Overlay transparan gelap */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    /* Konten hero */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      text-align: left;
+      padding: 20px;
+      color: white;
+      margin-left: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+    }
+    .hero-content h4 {
+      color: #f4c542;
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .hero-content h1 {
+      font-size: 48px;
+      font-weight: bold;
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+    /* Deskripsi */
+    .hero-content p {
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 30px;
+      color: #f2f2f2;
+      max-width: 650px;
+    }
+
+    /* Tombol */
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-primary {
+      background-color: #FFD700;
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background-color: #e6c200;
+    }
+
+    .btn-secondary {
+      background-color: #FFEB7F;
+      color: #000;
+    }
+
+    .btn-secondary:hover {
+      background-color: #FFD700;
+    }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 40px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+/*** Footer Start ***/
+.footer {
+  background: linear-gradient(
+                rgba(255, 251, 234, 0.9), /* Warna putih kekuningan dengan transparansi */
+                rgba(255, 251, 234, 0.9)  /* Sama agar hasilnya rata */
+              ),
+              url('../src/footer.jpg'); /* Gambar latar belakang footer */
+  background-position: center;      /* Gambar terpusat */
+  background-repeat: no-repeat;     /* Tidak diulang */
+  background-size: cover;           /* Menutupi seluruh area footer */
+  padding: 50px 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+.footer h2 span {
+  color: #FFC107; /* kuning utama */
+}
+
+.footer .footer-col {
+  width: 25%;
+  float: left;
+  padding: 0 15px;
+}
+
+.footer p {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.newsletter-box {
+  background: #fff3cd; /* kuning lembut */
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.newsletter-box h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.newsletter-box input {
+  padding: 10px;
+  border: none;
+  width: 70%;
+  border-radius: 5px;
+}
+
+.newsletter-box button {
+  padding: 10px 15px;
+  border: none;
+  background: #FFC107; /* tombol kuning */
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.time-box {
+  background: #fff3cd; /* kuning lembut */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.footer h4 {
+  color: #FFC107;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #FFC107;
+  display: inline-block;
+}
+
+.social-icons span {
+  font-size: 20px;
+  margin-right: 8px;
+  color: #FFC107;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 50%;
+  border: 2px dotted #FFC107;
+}
+
+.footer-bottom {
+  clear: both;
+  text-align: center;
+  padding: 20px;
+  background: #2d2d52;
+  color: #fff;
+  margin-top: 30px;
+}
+
+.footer-bottom a {
+  color: #FFC107;
+  text-decoration: none;
+}
+
+.about-us {
+background: linear-gradient(
+                rgba(255, 251, 234, 0.9), /* Warna putih kekuningan dengan transparansi */
+                rgba(255, 251, 234, 0.9)  /* Sama agar hasilnya rata */
+              ),
+              url('../src/footer.jpg'); /* Gambar latar belakang footer */
+  background-position: center;      /* Gambar terpusat */
+  background-repeat: no-repeat;     /* Tidak diulang */
+  background-size: cover;           /* Menutupi seluruh area footer */
+  padding: 50px 0;
+  font-family: Arial, sans-serif;
+  color: #333;}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.about-img img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.about-text .subtitle {
+  color: #f4c542; /* Kuning gelap seperti what-we-do */
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.about-text .title {
+  color: #2c2c54; /* Sama dengan what-we-do untuk konsistensi */
+  font-size: 36px; /* Sama dengan title di what-we-do */
+  font-weight: 800;
+  margin-bottom: 40px;
+  line-height: 1.3;
+}
+
+
+.about-text p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.about-list {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 25px;
+}
+
+.about-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-list li {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 15px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.about-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #f4c542; /* kuning cerah */
+}
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #f4c542; /* tombol kuning */
+  color: #000;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #e6b800; /* kuning lebih gelap saat hover */
+  color: #fff;
+}
+.services {
+  padding: 80px 0;
+  background: #fffbea;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fbc02d;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  flex: 1 1 300px;
+  max-width: 350px;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.service-card .icon img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+.service-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fbc02d;
+  margin-bottom: 15px;
+}
+.service-card p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 20px;
+}
+.btn-yellow {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #fbc02d;
+  color: #fff;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn-yellow:hover {
+  background: #f9a825;
+}
+/* Bagian Section */
+.what-we-do {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(to bottom, #fff7cc, #fff9e6); /* Background kuning lembut */
+}
+
+/* Judul */
+.what-we-do .subtitle {
+  color: #f4c542; /* Kuning gelap */
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.what-we-do .title {
+  color: #2c2c54; /* Teks biru gelap agar kontras */
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  line-height: 1.3;
+}
+
+/* Container untuk cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Card Style */
+.card {
+  background: white;
+  border: 2px solid #fdd835; /* Border kuning */
+  border-radius: 20px 60px 20px 20px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(253, 216, 53, 0.4); /* Bayangan kuning */
+}
+
+/* Card Heading */
+.card h3 {
+  color: #f4b400; /* Judul kuning gelap */
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Card Text */
+.card p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Button */
+.read-more {
+  background: #fdd835; /* Tombol kuning */
+  color: #2c2c54;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.read-more:hover {
+  background: #fbc02d; /* Kuning lebih gelap saat hover */
+  color: #fff;
+}
+/* ===== Section Styling ===== */
+.facilities-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== Subtitle ===== */
+.facilities-subtitle {
+  color: #fbc02d; /* Kuning gelap */
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ===== Title ===== */
+.facilities-title {
+  color: #2c2c54;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 50px;
+}
+/* ===== Facilities Grid ===== */
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===== Facility Card ===== */
+.facility-card {
+  background: #fff5d9; /* Soft Yellow Accent */
+  border: 1px solid #fcecc3;
+  border-radius: 15px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facility-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.facility-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.facility-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f4b400; /* Golden Yellow */
+  margin-bottom: 5px;
+}
+
+/* ===== Subtitle di dalam card ===== */
+.facility-subtitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.facility-text {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .facility-card {
+    padding: 25px 15px;
+  }
+}
+/* Section Tim Terapis */
+.terapis-section {
+  text-align: center;
+  padding: 50px 20px;
+  background: #fff9e6;
+
+}
+.terapis-subtitle {
+  color: #fbc02d; /* Kuning gelap */
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.terapis-title {
+  color: #2c2c54;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 50px;
+}
+
+.section-header .description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 50px;
+}
+
+/* Grid Terapis */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Kartu Terapis */
+.team-card {
+  background: #fff;
+  border: 2px solid #f4c542; /* Border kuning */
+  border-radius: 15px;
+  padding: 30px 20px;
+  box-shadow: 6px 6px 0px #0d47a1; /* Bayangan biru */
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #0b3d91;
+}
+
+/* Gambar Terapis */
+.team-image {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f4c542;
+  margin: 0 auto 20px auto;
+}
+
+.team-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nama Terapis */
+.team-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0d47a1; /* Biru gelap */
+  line-height: 1.4;
+}
+
+/* Tombol Lihat Semua */
+.team-button {
+  margin-top: 50px;
+}
+
+.btn-view-all {
+  display: inline-block;
+  background-color: #f4c542;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease;
+}
+
+.btn-view-all:hover {
+  background-color: #e6b800;
+  color: #fff;
+}
+
+/* ===== TESTIMONIALS SECTION ===== */
+.testimonials-section {
+  padding: 60px 20px;
+  background: #fff9e6;
+  text-align: center;
+}
+
+.testimonials-subtitle {
+  color: #fbc02d;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.testimonials-title {
+  color: #2c2c54;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 50px;
+}
+
+/* ===== TESTIMONIAL FORM ===== */
+.testimonial-form-container {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 50px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.testimonial-form-container h3 {
+  color: #2c2c54;
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #fbc02d;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ===== STAR RATING ===== */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 30px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin-bottom: 0;
+}
+
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #fbc02d;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.btn-submit {
+  background: #fbc02d;
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  background: #f9a825;
+}
+
+.btn-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===== TESTIMONIALS DISPLAY ===== */
+.testimonials-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.testimonials-carousel {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 30px;
+  padding: 40px 20px;
+  align-items: stretch;
+  cursor: grab;
+}
+
+.testimonials-carousel:active {
+  cursor: grabbing;
+}
+
+.testimonials-carousel.dragging {
+  transition: none;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  min-width: 380px;
+  max-width: 380px;
+  flex-shrink: 0;
+  text-align: left;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.testimonial-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #fbc02d, #ff9800);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(251, 192, 45, 0.3);
+}
+
+.testimonial-info {
+  flex: 1;
+}
+
+.testimonial-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c2c54;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.testimonial-rating {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 15px;
+}
+
+.testimonial-rating .star {
+  color: #fbc02d;
+  font-size: 18px;
+  text-shadow: 0 1px 2px rgba(251, 192, 45, 0.3);
+}
+
+.testimonial-rating .star.empty {
+  color: #ddd;
+}
+
+.testimonial-text {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ===== CAROUSEL CONTROLS ===== */
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.carousel-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.carousel-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.carousel-btn:disabled:hover {
+  background: #ccc;
+  transform: none;
+}
+
+/* ===== PAGINATION DOTS ===== */
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pagination-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.pagination-dot:hover {
+  background: #fbc02d;
+  transform: scale(1.2);
+}
+
+.pagination-dot.active {
+  background: #fbc02d;
+  transform: scale(1.3);
+  box-shadow: 0 2px 8px rgba(251, 192, 45, 0.4);
+}
+
+.pagination-dot.active::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #fbc02d;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.1; }
+  100% { transform: scale(1); opacity: 0.3; }
+}
+
+/* ===== AUTO SCROLL INDICATOR ===== */
+.auto-scroll-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #666;
+}
+
+.auto-scroll-toggle {
+  width: 20px;
+  height: 20px;
+  background: #fbc02d;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auto-scroll-toggle.paused {
+  background: #ccc;
+}
+
+.auto-scroll-toggle::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: white;
+}
+
+.auto-scroll-toggle.paused::after {
+  content: '⏸';
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .testimonials-title {
+    font-size: 28px;
+  }
+  
+  .testimonial-form-container {
+    padding: 30px 20px;
+    margin: 0 20px 50px 20px;
+  }
+  
+  .testimonials-carousel {
+    padding: 20px 10px;
+  }
+  
+  .testimonial-card {
+    min-width: 300px;
+    max-width: 300px;
+    padding: 25px;
+  }
+  
+  .testimonial-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin-right: 15px;
+  }
+  
+  .testimonial-name {
+    font-size: 18px;
+  }
+  
+  .testimonial-text {
+    font-size: 15px;
+  }
+  
+  .carousel-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+  
+  .star-rating label {
+    font-size: 25px;
+  }
+  
+  .pagination-dots {
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 280px;
+    padding: 20px;
+  }
+  
+  .testimonials-carousel {
+    padding: 15px 5px;
+  }
+  
+  .carousel-controls {
+    gap: 15px;
+    margin-top: 30px;
+  }
+}
+  </style>
+
 </head>
 <body>
   <nav class="navbar">
@@ -14,8 +1113,9 @@
         <span class="name">Labirin Children Center</span>
       </div>
       <div class="nav-links">
-        <a href="./index.html">Homepage</a>
-        <a href="#paket-labirin">Paket Belajar</a>
+        <a href="./index.html">Beranda</a>
+        <a href="./terapis1.html">Terapis</a>
+        <a href="./index.html#layanan">Layanan</a>
         <span data-user-name class="tag"></span>
         <a class="btn btn-login" data-btn-login href="./login.html">Login</a>
         <a class="btn btn-accent hidden" data-btn-logout href="#" onclick="fetch('../backend/auth_logout.php',{credentials:'include'}).then(()=>location.reload())">Logout</a>
@@ -23,202 +1123,677 @@
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-image">
-          <img src="../src/foto.png" alt="Klinik Tumbuh Kembang" />
-        </div>
-        <div class="hero-text">
-          <h1>Klinik Tumbuh Kembang & Center Terapi Anak</h1>
-          <p>Selamat datang di Labirin Children Center Kendari. Kami hadir untuk mendampingi tumbuh kembang anak Anda dengan layanan terapi yang profesional dan penuh kasih sayang.</p>
-          <div class="flex mt-16">
-            <a class="btn btn-accent" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20terapi%20anak">Hubungi CS</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section class="section container" id="paket-belajar">
-    <h2>Kenapa kami adalah pilihan yang tepat?</h2>
-    <p>Labirin Children Center Kendari adalah klinik tumbuh kembang dan center terapi anak yang telah berdedikasi dalam mendukung perkembangan optimal anak-anak sejak tahun 2020. Kami dengan penuh semangat menjalankan misi kami untuk memberikan layanan terapi yang berkualitas tinggi kepada anak-anak dengan kebutuhan khusus, siap membantu mewujudkan potensi terbaik anak Anda.</p>
-    
-    <div class="grid-2">
-      <div class="card card-feature">
-        <img class="card-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Metode" />
-        <div class="card-body">
-          <h3>Metode Belajar Terbaik</h3>
-          <p>Kami menyusun metode pembelajaran yang menyenangkan dan efektif, disesuaikan dengan kebutuhan individual setiap anak. Pendekatan terapi yang kami gunakan telah terbukti membantu anak mencapai milestone perkembangan yang optimal.</p>
-        </div>
-      </div>
-      <div class="card card-feature">
-        <img class="card-icon-img" src="../src/016-doctor.png" alt="Ikon Mentor/Terapis" />
-        <div class="card-body">
-          <h3>Mentor/Terapis Terbaik</h3>
-          <p>Tim terapis kami terdiri dari profesional berpengalaman yang telah menangani ribuan anak dengan berbagai kebutuhan khusus. Mereka berdedikasi penuh untuk memberikan pendampingan terbaik bagi tumbuh kembang anak Anda.</p>
-        </div>
+  <section class="hero">
+    <div class="hero-content">
+      <h4 class="mb-3 text-primary">Labirin Children Center Kendari</h4>
+      <h1 class="mb-5 display-1 text-white">Klinik Tumbuh Kembang<br>& Terapi Anak</h1>
+      <div class="hero-buttons">
+        <button class="btn btn-primary">Hubungi Kami</button>
       </div>
     </div>
   </section>
+ <section class="about-us">
+  <div class="container">
+    <div class="about-content">
+      <!-- Gambar / Video di kiri -->
+      <div class="about-img">
+         <img class="tentang-kami" src="../src/gambaranak.png" alt="Labirin Children Center" />
+      </div>
 
-  <section class="section container" id="paket-labirin">
-    <h2>Paket Pembelajaran Labirin Children Center</h2>
-    <p>Berikut paket pembelajaran yang ada di labirin children center :</nbs p></p>
-    <div class="course-grid">
-      <article class="course-card card-3d">
-        <div class="course-header">
-          <img class="badge-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Paket" />
-          <h3>PAKET WICARA</h3>
-        </div>
-        <p>k</p>
-        <div class="course-note"></div>
-        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20PKN%20STAN" class="btn btn-primary course-btn" target="_blank" rel="noopener">JOIN</a>
-      </article>
-
-      <article class="course-card card-3d">
-        <div class="course-header">
-          <img class="badge-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Paket" />
-          <h3>PAKET OKUPASI</h3>
-        </div>
-        <p></p>
-        <div class="course-note"></div>
-        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20IPDN" class="btn btn-primary course-btn" target="_blank" rel="noopener">JOIN</a>
-      </article>
-
-      <article class="course-card card-3d">
-        <div class="course-header">
-          <img class="badge-icon-img" src="../src/images-3-removebg-preview.png" alt="Ikon Paket" />
-          <h3>PAKET </h3>
-        </div>
-        <p>salam dari binjai</p>
-        <div class="course-note">alamak oyyy</div>
-        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20POLSTAT%20STIS" class="btn btn-primary course-btn" target="_blank" rel="noopener">JOIN</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section container" id="terapis">
-    <h2>Daftar Terapis</h2>
-    <p>Berikut adalah daftar terapis terpercaya kami untuk buah hati anda :</p>
-    <div class="therapist-grid">
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/dr.andi.png" alt="Terapis" />
-        <h3 class="therapist-name">Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 2</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 3</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 4</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 5</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 6</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 7</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 8</h3>
-      </article>
-      <article class="course-card therapist-card">
-        <img class="therapist-photo" src="../src/016-doctor.png" alt="Terapis" />
-        <h3 class="therapist-name">Terapis 9</h3>
-      </article>
-    </div>
-    <div class="therapist-cta">
-      <a href="#" class="btn btn-accent">Lihat Semua Terapis</a>
-    </div>
-  </section>
-
-  <section class="section container" id="tentang-kami">
-    <h2>Tentang Kami</h2>
-    <div class="about">
+      <!-- Teks di kanan -->
       <div class="about-text">
-        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
-        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
-        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
-        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
-        <p>Klinik Pela 9 berdiri sejak tahun 2000 atas dasar prakarsa Dr. Iramsawaty Kamarul, Sp.A(K), Dokter Spesialis Anak Sub-spesialis Neurologi Anak dengan tujuan membantu keluarga dengan anak yang mengalami hambatan atau gangguan tumbuh kembang secara terpadu dengan melibatkan tim Dokter Spesialis Anak, Psikiater Anak, Psikolog, dan para Terapis berpengalaman dengan sertifikat dalam hingga luar negeri.</p>
-        <p>Hingga pada saat ini, Klinik Pela 9 telah melayani lebih dari 10.000 pasien dari dalam dan luar kota dengan jumlah sesi terapi mencapai 5.000/bulannya. Klinik Pela 9 telah hadir di bilangan Kebayoran, Tomang, dan Bintaro, serta dalam bentuk Pela 9 Education Center di Kemang.</p>
-      </div>
-      <div class="about-images">
-        <img src="../src/foto.png" alt="Terapi Anak" class="about-img" />
-        <img src="../src/foto.png" alt="Terapis" class="about-img small" />
+        <h4 class="subtitle">About Us</h4>
+        <h2 class="title">Labirin Children Center<br>Membangun Masa Depan Cerah Anak</h2>
+        <p>
+          Kesehatan dan tumbuh kembang anak merupakan aspek penting dalam proses pertumbuhan mereka. 
+          Berdiri sejak 2019, Labirin Children Center hadir sebagai pusat layanan kesehatan dan pendidikan inklusi bagi anak-anak, 
+          termasuk mereka yang berkebutuhan khusus (ABK).
+        </p>
+        <div class="about-list">
+          <ul>
+            <li>Asesmen tumbuh kembang</li>
+            <li>Terapi anak</li>
+            <li>Pendidikan inklusi ABK</li>
+          </ul>
+          <ul>
+            <li>PAUD Inklusi sejak 2021</li>
+            <li>Belajar bersama anak tipikal</li>
+            <li>Meningkatkan kemampuan akademik & sosial</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section container" id="testimoni">
-    <h2>Testimoni</h2>
-    <p>Lihat ungkapan pasien kami setelah mendapatkan layanan terbaik</p>
-    <div class="testimonial-wrap">
-      <button class="nav-btn prev" aria-label="Sebelumnya">‹</button>
-      <div class="testimonial-track" data-testimonial-track>
-        <article class="testimonial-card">
-          <div class="head">
-            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
-            <div>
-              <div class="name">Have Tomven</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <p>“Sangat membantu perkembangan motorik anak saya…”</p>
-        </article>
-        <article class="testimonial-card">
-          <div class="head">
-            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
-            <div>
-              <div class="name">Arna Wati</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <p>“Terapisnya handal dan komunikatif, kebersihan terjaga, adminnya ramah.”</p>
-        </article>
-        <article class="testimonial-card">
-          <div class="head">
-            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
-            <div>
-              <div class="name">Wahyu Titis Kholifah</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <p>“Pelayanannya memuaskan, terapis profesional. Recommended!”</p>
-        </article>
-        <article class="testimonial-card">
-          <div class="head">
-            <img src="../src/images-3.png" alt="Avatar" class="avatar" />
-            <div>
-              <div class="name">Bunda Mega</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <p>“Anak jadi lebih percaya diri, terima kasih tim Labirin.”</p>
-        </article>
-      </div>
-      <button class="nav-btn next" aria-label="Berikutnya">›</button>
+<section class="what-we-do" id="layanan">
+  <h4 class="subtitle">Layanan</h4>
+  <h2 class="title">Layanan yang Kami Tawarkan</h2>
+
+  <div class="cards-container">
+    <div class="card">
+      <h3>Terapi Perilaku (ABA/Vb-ABA)</h3>
+      <p>Terapi berbasis perilaku yang efektif untuk anak dengan autisme atau gangguan perilaku, 
+          fokus pada keterampilan sosial, komunikasi, dan adaptasi sehari-hari melalui pendekatan positif.
+        </p>
+    <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20IPDN" class="btn-yellow">Hubungi Kami</a>
     </div>
-  </section>
 
-  <footer class="footer">
-    <div class="container">© 2025 Labirin Children Kendari</div>
-  </footer>
+    <div class="card">
+      <h3>Sensori Integrasi</h3>
+      <p> Program terapi untuk membantu anak mengintegrasikan input sensorik (sentuhan, gerak, suara), 
+          meningkatkan koordinasi, perhatian, dan kemandirian bagi anak dengan kesulitan sensorik.
+        </p>
+     <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20IPDN" class="btn-yellow">Hubungi Kami</a>
+    </div>
+
+    <div class="card">
+      <h3>Auditory Verbal Therapy (AVT)</h3>
+      <p> <p>
+          Terapi untuk anak dengan gangguan pendengaran atau keterlambatan bicara, 
+          menggunakan pendekatan auditory-verbal agar anak berkembang dalam mendengar, berbicara, dan berbahasa.
+        </p>
+        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20IPDN" class="btn-yellow">Hubungi Kami</a>
+    </div>
+
+    <div class="card">
+      <h3>Remedial Akademik</h3>
+      Layanan bantuan belajar individual untuk anak dengan kesulitan akademik, termasuk disleksia atau keterlambatan belajar, dengan metode interaktif untuk meningkatkan prestasi sekolah dan kepercayaan diri.
+        </p>
+        <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20join%20paket%20IPDN" class="btn-yellow">Hubungi Kami</a>
+    </div>
+  </div>
+</section>
+
+<section class="terapis-section">
+  <h4 class="terapis-subtitle">Terapis</h4>
+  <h2 class="terapis-title">Tim Terapis Profesional Kami</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-image">
+          <img src="../src/dr.andi.png" alt="Dr. Andi Rizky Amelia">
+        </div>
+        <h5 class="team-name">Dr. Andi Rizky Amelia,<br>M.Psi., Psikolog</h5>
+      </div>
+      <div class="team-card">
+        <div class="team-image">
+          <img src="terapis-icon.png" alt="Terapis 2">
+        </div>
+        <h5 class="team-name">Terapis 2</h5>
+      </div>
+      <div class="team-card">
+        <div class="team-image">
+          <img src="terapis-icon.png" alt="Terapis 3">
+        </div>
+        <h5 class="team-name">Terapis 3</h5>
+      </div>
+    </div>
+    <div class="team-button">
+      <a href="terapis1.html" class="btn-view-all">Lihat Semua Terapis</a>
+    </div>
+  </div>
+</section>
+
+<section class="facilities-section">
+  <h4 class="facilities-subtitle">Fasilitas</h4>
+  <h2 class="facilities-title">Fasilitas untuk Anak Anda</h2>
+    <div class="fasilitas-wrapper">
+      <div class="fasilitas-card">
+        <div class="icon">
+          <img src="../src/ahliterapi.png"  alt="Psikolog">
+        </div>
+        <h3 class="card-title">Disupervisi oleh Psikolog</h3>
+        <p class="card-subtitle">Pendampingan Profesional</p>
+        <p class="card-text">
+          Setiap sesi terapi dan pembelajaran diawasi langsung oleh psikolog berlisensi
+          untuk memastikan pendekatan yang tepat dan efektif bagi perkembangan anak.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="fasilitas-card">
+        <div class="icon">
+          <img src="../src/cctv.png" alt="CCTV">
+        </div>
+        <h3 class="card-title">Dilengkapi CCTV</h3>
+        <p class="card-subtitle">Keamanan & Privasi</p>
+        <p class="card-text">
+          Seluruh area klinik dan ruang terapi dipasang CCTV untuk keamanan dan privasi,
+          memungkinkan orang tua memantau sesi secara real-time sambil menjaga kerahasiaan data.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="fasilitas-card">
+        <div class="icon">
+          <img src="../src/1anak.jpg" alt="Terapis">
+        </div>
+        <h3 class="card-title">1 Anak 1 Terapis + Ruangan Pribadi</h3>
+        <p class="card-subtitle">Pendekatan Personal</p>
+        <p class="card-text">
+          Menekankan pendekatan personal, kenyamanan anak, dan fokus pada perkembangan individu.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Section Testimoni -->
+<section class="testimonials-section">
+  <div class="container">
+    <h4 class="testimonials-subtitle">Testimoni</h4>
+    <h2 class="testimonials-title">Lihat ungkapan pasien kami setelah mendapatkan layanan terbaik</h2>
+    
+    <!-- Form Input Testimoni -->
+    <div class="testimonial-form-container">
+      <h3>Bagikan Pengalaman Anda</h3>
+      <form id="testimonialForm" class="testimonial-form">
+        <div class="form-group">
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" required maxlength="100" placeholder="Masukkan nama lengkap Anda">
+        </div>
+        
+        <div class="form-group">
+          <label>Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" required>
+            <label for="star5">★</label>
+            <input type="radio" id="star4" name="rating" value="4" required>
+            <label for="star4">★</label>
+            <input type="radio" id="star3" name="rating" value="3" required>
+            <label for="star3">★</label>
+            <input type="radio" id="star2" name="rating" value="2" required>
+            <label for="star2">★</label>
+            <input type="radio" id="star1" name="rating" value="1" required>
+            <label for="star1">★</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="caption">Testimoni</label>
+          <textarea id="caption" name="caption" required minlength="10" maxlength="500" 
+                    placeholder="Bagikan pengalaman Anda dengan layanan kami (minimal 10 karakter, maksimal 500 karakter)"></textarea>
+          <div class="char-count">
+            <span id="charCount">0</span>/500 karakter
+          </div>
+        </div>
+        
+        <button type="submit" class="btn-submit">Kirim Testimoni</button>
+      </form>
+    </div>
+    
+    <!-- Tampilan Testimoni -->
+    <div class="testimonials-container">
+      <!-- Auto Scroll Indicator -->
+      <div class="auto-scroll-indicator">
+        <span>Auto</span>
+        <div class="auto-scroll-toggle" id="autoScrollToggle" onclick="toggleAutoScroll()"></div>
+      </div>
+      
+      <div class="testimonials-carousel" id="testimonialsCarousel">
+        <!-- Testimoni akan dimuat dari database via JavaScript -->
+      </div>
+      
+      <!-- Pagination Dots -->
+      <div class="pagination-dots" id="paginationDots">
+        <!-- Dots will be generated by JavaScript -->
+      </div>
+      
+      <div class="carousel-controls">
+        <button class="carousel-btn prev-btn" onclick="prevTestimonial()">‹</button>
+        <button class="carousel-btn next-btn" onclick="nextTestimonial()">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+         <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <!-- Left Section -->
+      <div class="footer-col">
+        <h2><span>Labirin</span>Children Center</h2>
+        <p>
+           Kami hadir untuk mendampingi tumbuh kembang anak Anda dengan layanan terapi yang profesional dan penuh kasih sayang.
+        </p>
+        <div class="newsletter-box">
+          <h4>Newsletter</h4>
+          <form>
+            <input type="email" placeholder="Your email" />
+            <button type="submit">SignUp</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Middle Section -->
+      <div class="footer-col">
+        <div class="time-box">
+          <p>Monday: 8am to 5pm</p>
+          <p>Tuesday: 8am to 5pm</p>
+          <p>Wednesday: 8am to 5pm</p>
+          <p>Thursday: 8am to 5pm</p>
+          <p>Friday: 8am to 5pm</p>
+          <p>Saturday: 8am to 5pm</p>
+          <p>Sunday: Closed</p>
+        </div>
+      </div>
+
+      <!-- Right Section -->
+      <div class="footer-col">
+        <h4>LOCATION</h4>
+        <p>Jl. Syech Yusuf No.19, Mandonga, Kota Kendari, Sulawesi Tenggara</p>
+        <p>(+62) 853-9442-4185</p>
+        <p>exampleemail@gmail.com</p>
+        <p>26/7 Hours Service</p>
+
+        <div class="social-icons">
+          <span>●</span>
+          <span>●</span>
+          <span>●</span>
+          <span>●</span>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <div class="footer-col">
+        <h4>OUR GALLARY</h4>
+        <div class="gallery">
+          <img src="img1.jpg" alt="gallery1" />
+          <img src="img2.jpg" alt="gallery2" />
+          <img src="img3.jpg" alt="gallery3" />
+          <img src="img4.jpg" alt="gallery4" />
+          <img src="img5.jpg" alt="gallery5" />
+          <img src="img6.jpg" alt="gallery6" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Labirin Children Kendari</p>
+  </div>
+</footer>
   <script src="./js/app.js"></script>
   <script>
     getSession().then(r=>setLoggedUI(r.user))
+    
+    // ===== TESTIMONIALS FUNCTIONALITY =====
+    let currentTestimonialIndex = 0;
+    let testimonials = [];
+    let totalPages = 0;
+    let autoScrollInterval = null;
+    let isAutoScrollEnabled = true;
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let startTransform = 0;
+    
+    // Load testimonials from database
+    async function loadTestimonials() {
+      try {
+        const response = await fetch('../backend/testimonials.php');
+        const data = await response.json();
+        
+        if (data.ok) {
+          testimonials = data.data;
+          renderTestimonials();
+        } else {
+          console.error('Failed to load testimonials:', data.error);
+        }
+      } catch (error) {
+        console.error('Error loading testimonials:', error);
+      }
+    }
+    
+    // Render testimonials in carousel
+    function renderTestimonials() {
+      const carousel = document.getElementById('testimonialsCarousel');
+      if (!carousel) return;
+      
+      carousel.innerHTML = '';
+      
+      testimonials.forEach((testimonial, index) => {
+        const card = createTestimonialCard(testimonial);
+        carousel.appendChild(card);
+      });
+      
+      // Calculate total pages (3 testimonials per page)
+      totalPages = Math.ceil(testimonials.length / 3);
+      
+      // Generate pagination dots
+      generatePaginationDots();
+      
+      // Setup touch/drag events
+      setupDragEvents();
+      
+      // Start auto scroll
+      startAutoScroll();
+      
+      updateCarouselPosition();
+    }
+    
+    // Create testimonial card element
+    function createTestimonialCard(testimonial) {
+      const card = document.createElement('div');
+      card.className = 'testimonial-card';
+      
+      const initials = testimonial.nama.split(' ').map(n => n[0]).join('').toUpperCase();
+      
+      card.innerHTML = `
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">${initials}</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">${testimonial.nama}</div>
+            <div class="testimonial-rating">
+              ${generateStars(testimonial.rating)}
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-text">"${testimonial.caption}"</div>
+      `;
+      
+      return card;
+    }
+    
+    // Generate star rating HTML
+    function generateStars(rating) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        const className = i <= rating ? 'star' : 'star empty';
+        stars += `<span class="${className}">★</span>`;
+      }
+      return stars;
+    }
+    
+    // Update carousel position with smooth scrolling
+    function updateCarouselPosition() {
+      const carousel = document.getElementById('testimonialsCarousel');
+      if (!carousel) return;
+      
+      const cardWidth = 380 + 30; // card width + gap
+      const translateX = -currentTestimonialIndex * cardWidth;
+      
+      // Smooth transition (disable during drag)
+      if (!isDragging) {
+        carousel.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      }
+      carousel.style.transform = `translateX(${translateX}px)`;
+      
+      // Update button states
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      
+      if (prevBtn) prevBtn.disabled = currentTestimonialIndex === 0;
+      if (nextBtn) nextBtn.disabled = currentTestimonialIndex >= Math.max(0, testimonials.length - 3);
+      
+      // Update pagination dots
+      updatePaginationDots();
+    }
+    
+    // Generate pagination dots
+    function generatePaginationDots() {
+      const paginationContainer = document.getElementById('paginationDots');
+      if (!paginationContainer) return;
+      
+      paginationContainer.innerHTML = '';
+      
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'pagination-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.onclick = () => goToPage(i);
+        paginationContainer.appendChild(dot);
+      }
+    }
+    
+    // Update pagination dots
+    function updatePaginationDots() {
+      const dots = document.querySelectorAll('.pagination-dot');
+      const currentPage = Math.floor(currentTestimonialIndex / 3);
+      
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentPage);
+      });
+    }
+    
+    // Go to specific page
+    function goToPage(pageIndex) {
+      currentTestimonialIndex = pageIndex * 3;
+      updateCarouselPosition();
+    }
+    
+    // Carousel navigation
+    function prevTestimonial() {
+      if (currentTestimonialIndex > 0) {
+        currentTestimonialIndex--;
+        updateCarouselPosition();
+      }
+    }
+    
+    function nextTestimonial() {
+      if (currentTestimonialIndex < testimonials.length - 3) {
+        currentTestimonialIndex++;
+        updateCarouselPosition();
+      }
+    }
+    
+    // Setup drag/swipe events
+    function setupDragEvents() {
+      const carousel = document.getElementById('testimonialsCarousel');
+      if (!carousel) return;
+      
+      // Mouse events
+      carousel.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', endDrag);
+      
+      // Touch events
+      carousel.addEventListener('touchstart', startDrag);
+      document.addEventListener('touchmove', drag);
+      document.addEventListener('touchend', endDrag);
+    }
+    
+    // Start drag
+    function startDrag(e) {
+      isDragging = true;
+      const carousel = document.getElementById('testimonialsCarousel');
+      carousel.classList.add('dragging');
+      
+      startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+      startTransform = currentTestimonialIndex * (380 + 30);
+      
+      // Stop auto scroll during drag
+      stopAutoScroll();
+    }
+    
+    // Drag
+    function drag(e) {
+      if (!isDragging) return;
+      
+      e.preventDefault();
+      currentX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+      const diffX = startX - currentX;
+      const newTransform = startTransform + diffX;
+      
+      const carousel = document.getElementById('testimonialsCarousel');
+      carousel.style.transform = `translateX(-${newTransform}px)`;
+    }
+    
+    // End drag
+    function endDrag() {
+      if (!isDragging) return;
+      
+      isDragging = false;
+      const carousel = document.getElementById('testimonialsCarousel');
+      carousel.classList.remove('dragging');
+      
+      const diffX = startX - currentX;
+      const threshold = 100; // Minimum drag distance to trigger slide
+      
+      if (Math.abs(diffX) > threshold) {
+        if (diffX > 0) {
+          // Drag left - go to next
+          nextTestimonial();
+        } else {
+          // Drag right - go to previous
+          prevTestimonial();
+        }
+      } else {
+        // Snap back to current position
+        updateCarouselPosition();
+      }
+      
+      // Resume auto scroll after drag
+      if (isAutoScrollEnabled) {
+        startAutoScroll();
+      }
+    }
+    
+    // Auto scroll functions
+    function startAutoScroll() {
+      if (autoScrollInterval) clearInterval(autoScrollInterval);
+      
+      autoScrollInterval = setInterval(() => {
+        if (isAutoScrollEnabled && !isDragging) {
+          if (currentTestimonialIndex < testimonials.length - 3) {
+            currentTestimonialIndex++;
+          } else {
+            currentTestimonialIndex = 0; // Loop back to start
+          }
+          updateCarouselPosition();
+        }
+      }, 4000); // Auto scroll every 4 seconds
+    }
+    
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    }
+    
+    function toggleAutoScroll() {
+      isAutoScrollEnabled = !isAutoScrollEnabled;
+      const toggle = document.getElementById('autoScrollToggle');
+      
+      if (isAutoScrollEnabled) {
+        toggle.classList.remove('paused');
+        startAutoScroll();
+      } else {
+        toggle.classList.add('paused');
+        stopAutoScroll();
+      }
+    }
+    
+    // Character counter for textarea
+    function updateCharCount() {
+      const textarea = document.getElementById('caption');
+      const counter = document.getElementById('charCount');
+      
+      if (textarea && counter) {
+        counter.textContent = textarea.value.length;
+      }
+    }
+    
+    // Form submission
+    async function submitTestimonial(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const submitBtn = form.querySelector('.btn-submit');
+      const formData = new FormData(form);
+      
+      const data = {
+        nama: formData.get('nama'),
+        rating: parseInt(formData.get('rating')),
+        caption: formData.get('caption')
+      };
+      
+      // Validation
+      if (!data.nama || !data.rating || !data.caption) {
+        alert('Mohon lengkapi semua field!');
+        return;
+      }
+      
+      if (data.caption.length < 10) {
+        alert('Testimoni minimal 10 karakter!');
+        return;
+      }
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Mengirim...';
+      
+      try {
+        const response = await fetch('../backend/testimonials.php?action=submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          alert(result.message);
+          form.reset();
+          document.getElementById('charCount').textContent = '0';
+          loadTestimonials(); // Reload testimonials
+        } else {
+          alert('Error: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Error submitting testimonial:', error);
+        alert('Terjadi kesalahan. Silakan coba lagi.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Kirim Testimoni';
+      }
+    }
+    
+    // Cleanup function
+    function cleanup() {
+      stopAutoScroll();
+      isDragging = false;
+    }
+    
+    // Pause auto scroll on hover
+    function pauseOnHover() {
+      const container = document.querySelector('.testimonials-container');
+      if (!container) return;
+      
+      container.addEventListener('mouseenter', stopAutoScroll);
+      container.addEventListener('mouseleave', () => {
+        if (isAutoScrollEnabled) {
+          startAutoScroll();
+        }
+      });
+    }
+    
+    // Initialize testimonials functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load testimonials
+      loadTestimonials();
+      
+      // Setup form
+      const form = document.getElementById('testimonialForm');
+      if (form) {
+        form.addEventListener('submit', submitTestimonial);
+      }
+      
+      // Setup character counter
+      const textarea = document.getElementById('caption');
+      if (textarea) {
+        textarea.addEventListener('input', updateCharCount);
+      }
+      
+      // Setup hover pause
+      pauseOnHover();
+      
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', cleanup);
+    });
   </script>
 </body>
 </html>
